@@ -8,9 +8,15 @@
  */
 int is_number(char *str)
 {
-	while (str && *str)
+	if (!str)
+		return (0);
+
+	if (*str == '-')
+		str++;
+
+	while (*str)
 	{
-		if ((*str < '0' || *str > '9') && (*str != '-' || *str != '+'))
+		if (*str < '0' || *str > '9')
 			return (0);
 
 		str++;

@@ -1,6 +1,6 @@
 #include "monty.h"
 
-char **tokens = NULL;
+global_t global;
 
 /**
  * main - interpreter for monty bytecode files.
@@ -11,59 +11,67 @@ char **tokens = NULL;
  */
 int main(int ac, char **av)
 {
-	FILE *file;
+	init_global();
 
 	if (ac != 2)
 		exit_with_ferror("USAGE: monty file\n");
 
-	file = fopen(av[1], "r");
+	global.file = fopen(av[1], "r");
 
-	if (!file)
+	if (!(global.file))
 		exit_with_ferror("Error: Can't open file %s\n", av[1]);
 
-	interpret(file);
+	interpret();
 
-	fclose(file);
+	fclose(global.file);
 
 	return (EXIT_SUCCESS);
 }
 
 /**
- * interpret - interprets a monty bytecode file.
- * @file: the file.
- */
-void interpret(FILE *file)
+* init_global - initializes global variable.
+*/
+void init_global(void)
 {
-	char *line = NULL;
-	size_t n = 0;
-	unsigned int line_number = 0;
-	stack_t *stack = NULL;
+	global.file = NULL;
+	global.line = NULL;
+	global.n = 0;
+	global.tokens = NULL;
+	global.stack = NULL;
+}
 
-	while (getline(&line, &n, file) != -1)
+/**
+ * interpret - interprets a monty bytecode file.
+ */
+void interpret(void)
+{
+	unsigned int line_number = 0;
+
+	while (getline(&(global.line), &(global.n), global.file) != -1)
 	{
 		void (*f)(stack_t **stack, unsigned int line_number) = NULL;
 
 		line_number++;
-		line_split(line, " \t\n");
+		line_split(global.line, " \t\n");
 
-		if (tokens[0])
+		if (global.tokens[0])
 		{
 			f = *find_instruction();
 
 			if (f)
-				f(&stack, line_number);
+				f(&(global.stack), line_number);
 			else
 				exit_with_ferror("L%d: unknown instruction %s\n",
 						line_number,
-						tokens[0]);
+						global.tokens[0]);
 		}
 
-		free(line);
-		line = NULL;
-		free(tokens);
-		tokens = NULL;
+		free(global.line);
+		global.line = NULL;
+		free(global.tokens);
+		global.tokens = NULL;
 	}
 
-	free(line);
-	free_stack(&stack);
+	free(global.line);
+	free_stack(&(global.stack));
 }

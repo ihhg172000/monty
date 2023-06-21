@@ -10,10 +10,10 @@ void push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 	int number;
 
-	if (!is_number(tokens[1]))
+	if (!is_number(global.tokens[1]))
 		exit_with_ferror("L%d: usage: push integer\n", line_number);
 
-	number = atoi(tokens[1]);
+	number = atoi(global.tokens[1]);
 
 	new = malloc(sizeof(stack_t));
 

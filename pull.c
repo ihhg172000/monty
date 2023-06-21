@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * pull - prints all the values on the stack.
+ * pall - prints all the values on the stack.
  * @stack: a pointer to the stack.
  * @line_number: the line number.
  */
-void pull(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	stack_t *curr = *stack;
 

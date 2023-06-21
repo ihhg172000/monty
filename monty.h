@@ -8,8 +8,6 @@
 #include <stdarg.h>
 #include <string.h>
 
-extern char **tokens;
-
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -40,17 +38,38 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+void init_global(void);
+
 void line_split(char *line, char *delim);
 void (*find_instruction())(stack_t **stack, unsigned int line_number);
 
-void interpret(FILE *ile);
+void interpret(void);
 
 void push(stack_t **stack, unsigned int line_number);
-void pull(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t **stack);
 
 void exit_with_ferror(char *format, ...);
 
 int is_number(char *str);
+
+/**
+ * struct global_s - _
+ * @file: _
+ * @line: _
+ * @n: _
+ * @tokens: _
+ * @stack: _
+ */
+typedef struct global_s
+{
+	FILE *file;
+	char *line;
+	size_t n;
+	char **tokens;
+	stack_t *stack;
+} global_t;
+
+extern global_t global;
 
 #endif

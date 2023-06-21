@@ -9,20 +9,20 @@ void line_split(char *line, char *delim)
 {
 	int i = 0;
 
-	tokens = malloc(sizeof(char *));
+	global.tokens = malloc(sizeof(char *));
 
-	if (!tokens)
+	if (!(global.tokens))
 		exit_with_ferror("Error: malloc failed\n");
 
-	tokens[0] = strtok(line, delim);
+	global.tokens[0] = strtok(line, delim);
 
 	do {
 		i++;
-		tokens = realloc(tokens, (i + 1) * sizeof(char *));
+		global.tokens = realloc(global.tokens, (i + 1) * sizeof(char *));
 
-		if (!tokens)
+		if (!(global.tokens))
 			exit_with_ferror("Error: malloc failed\n");
 
-		tokens[i] = strtok(NULL, delim);
-	} while (tokens[i] != NULL);
+		global.tokens[i] = strtok(NULL, delim);
+	} while (global.tokens[i] != NULL);
 }
