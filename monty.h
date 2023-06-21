@@ -47,6 +47,8 @@ void interpret(void);
 
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+
 void free_stack(stack_t **stack);
 
 void exit_with_ferror(char *format, ...);
