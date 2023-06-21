@@ -5,7 +5,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
 
+extern char **tokens;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -36,5 +39,18 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+void line_split(char *line, char *delim);
+void (*find_instruction())(stack_t **stack, unsigned int line_number);
+
+void interpret(FILE *ile);
+
+void push(stack_t **stack, unsigned int line_number);
+void pull(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t **stack);
+
+void exit_with_ferror(char *format, ...);
+
+int is_number(char *str);
 
 #endif
