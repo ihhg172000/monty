@@ -54,7 +54,7 @@ void interpret(void)
 		line_number++;
 		line_split(global.line, " \t\n");
 
-		if (global.tokens[0])
+		if (global.tokens[0] && global.tokens[0][0] != '#')
 		{
 			f = *find_instruction();
 
