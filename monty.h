@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <stdbool.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -61,6 +62,8 @@ void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
+void stack_mode(stack_t **stack, unsigned int line_number);
+void queue_mode(stack_t **stack, unsigned int line_number);
 
 void free_stack(stack_t **stack);
 
@@ -78,11 +81,13 @@ int is_number(char *str);
  */
 typedef struct global_s
 {
-	FILE *file;
+
 	char *line;
-	size_t n;
 	char **tokens;
+	bool queue_mode;
+	size_t n;
 	stack_t *stack;
+	FILE *file;
 } global_t;
 
 extern global_t global;

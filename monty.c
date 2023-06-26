@@ -38,6 +38,7 @@ void init_global(void)
 	global.n = 0;
 	global.tokens = NULL;
 	global.stack = NULL;
+	global.queue_mode = false;
 }
 
 /**

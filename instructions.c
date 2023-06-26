@@ -24,6 +24,8 @@ void (*find_instruction())(stack_t **stack, unsigned int line_number)
 		{"pstr", pstr},
 		{"rotl", rotl},
 		{"rotr", rotr},
+		{"stack", stack_mode},
+		{"queue", queue_mode},
 		{NULL, NULL}
 	};
 
